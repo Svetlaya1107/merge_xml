@@ -1,7 +1,7 @@
 package com.vpolosov.trainee.mergexml.service;
 
 import com.vpolosov.trainee.mergexml.aspect.Loggable;
-import com.vpolosov.trainee.mergexml.model.History;
+import com.vpolosov.trainee.mergexml.model.ValidationProcess;
 import com.vpolosov.trainee.mergexml.repository.HistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -32,7 +32,7 @@ import static com.vpolosov.trainee.mergexml.utils.XmlTags.DOCUMENTDATE;
 public class HistoryService {
 
     /**
-     * Репозиторий для взаимодействия с {@link History}.
+     * Репозиторий для взаимодействия с {@link ValidationProcess}.
      */
     private final HistoryRepository historyRepository;
 
@@ -54,19 +54,19 @@ public class HistoryService {
      */
     @Loggable
     @Transactional(readOnly = true)
-    public List<History> getHistoryListBySpec(Specification<History> spec) {
+    public List<ValidationProcess> getHistoryListBySpec(Specification<ValidationProcess> spec) {
         return historyRepository.findAll(spec);
     }
 
     /**
      * Сохраняет историю платежа.
      *
-     * @param history история платежа.
+     * @param validationProcess история платежа.
      */
     @Loggable
     @Transactional
-    public void addHistory(History history) {
-        historyRepository.save(history);
+    public void addHistory(ValidationProcess validationProcess) {
+        historyRepository.save(validationProcess);
     }
 
     /**
@@ -85,7 +85,7 @@ public class HistoryService {
             String documentDate = document.getElementsByTagName(DOCUMENTDATE)
                 .item(i)
                 .getTextContent();
-            var history = new History(
+            var history = new ValidationProcess(
                 docRef,
                 LocalDate.parse(documentDate, localDateFormat),
                 LocalDateTime.now(clock)

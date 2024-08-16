@@ -18,6 +18,7 @@ import java.util.Objects;
  *
  * @author Ali Takushinov
  * @author Maksim Litvinenko
+ * @author Andrey Telepnev
  */
 @Entity
 @Getter
@@ -25,7 +26,7 @@ import java.util.Objects;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class History {
+public class ValidationProcess {
 
     /**
      * Ref Документа.
@@ -47,7 +48,7 @@ public class History {
     private LocalDateTime dateTimeUpload;
 
     @OneToMany(mappedBy = "history", cascade = CascadeType.ALL)
-    private List<Metrics> metrics;
+    private List<ValidationFileHistory> metrics;
 
     @Override
     public final boolean equals(Object o) {
@@ -64,8 +65,8 @@ public class History {
         if (thisEffectiveClass != oEffectiveClass) {
             return false;
         }
-        History history = (History) o;
-        return getDocRef() != null && Objects.equals(getDocRef(), history.getDocRef());
+        ValidationProcess validationProcess = (ValidationProcess) o;
+        return getDocRef() != null && Objects.equals(getDocRef(), validationProcess.getDocRef());
     }
 
     @Override

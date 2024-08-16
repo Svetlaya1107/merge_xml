@@ -2,7 +2,7 @@ package com.vpolosov.trainee.mergexml.validators;
 
 import com.vpolosov.trainee.mergexml.aspect.Loggable;
 import com.vpolosov.trainee.mergexml.handler.exception.DuplicationProcessingException;
-import com.vpolosov.trainee.mergexml.model.History;
+import com.vpolosov.trainee.mergexml.model.ValidationProcess;
 import com.vpolosov.trainee.mergexml.service.HistoryService;
 import com.vpolosov.trainee.mergexml.service.specification.HistorySpecifications;
 import com.vpolosov.trainee.mergexml.utils.DocumentUtil;
@@ -78,13 +78,13 @@ public class CheckDocumentInHistory implements Predicate<Document> {
     @Loggable
     private Map<String, String> getLoadDateToBDFromHistory(Document document) {
         Map<String, String> docRefsAndFileNames = new HashMap<>();
-        Specification<History> spec = Specification.where(null);
+        Specification<ValidationProcess> spec = Specification.where(null);
 
         String docRef = documentUtil.getValueByTagName(document, DOCREF);
         docRefsAndFileNames.put(docRef, documentUtil.getFileName(document));
         spec = spec.or(HistorySpecifications.docRefEquals(docRef));
 
-        List<History> histories = historyService.getHistoryListBySpec(spec);
+        List<ValidationProcess> histories = historyService.getHistoryListBySpec(spec);
         return histories.stream()
             .peek(history -> loggerForDouble.info("Документ с номером {} из файла {} уже был загружен {}",
                 history.getDocRef(),

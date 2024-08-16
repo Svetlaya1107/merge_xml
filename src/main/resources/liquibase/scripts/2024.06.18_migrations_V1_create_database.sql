@@ -1,4 +1,4 @@
-create table history
+create table validationProcess
 (
     doc_ref                 VARCHAR(50) NOT NULL UNIQUE,
     document_date           DATE,

@@ -1,11 +1,11 @@
 package com.vpolosov.trainee.mergexml.service.specification;
 
 import com.vpolosov.trainee.mergexml.aspect.Loggable;
-import com.vpolosov.trainee.mergexml.model.History;
+import com.vpolosov.trainee.mergexml.model.ValidationProcess;
 import org.springframework.data.jpa.domain.Specification;
 
 /**
- * Спецификация {@link History} для запросов Criteria API.
+ * Спецификация {@link ValidationProcess} для запросов Criteria API.
  *
  * @author Ali Takushinov
  */
@@ -18,7 +18,7 @@ public class HistorySpecifications {
      * @return условие запроса для поиска по ссылке документа.
      */
     @Loggable
-    public static Specification<History> docRefEquals(String docRef) {
+    public static Specification<ValidationProcess> docRefEquals(String docRef) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("docRef"), docRef);
     }
 }
