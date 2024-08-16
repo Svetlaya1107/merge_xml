@@ -1,8 +1,6 @@
 package com.vpolosov.trainee.mergexml.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +10,7 @@ import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -46,6 +45,9 @@ public class History {
      */
     @Column(name = "date_time_upload")
     private LocalDateTime dateTimeUpload;
+
+    @OneToMany(mappedBy = "history", cascade = CascadeType.ALL)
+    private List<Metrics> metrics;
 
     @Override
     public final boolean equals(Object o) {

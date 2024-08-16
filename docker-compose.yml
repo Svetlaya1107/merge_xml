@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres
+    container_name: merge-xml-postgres
+    ports:
+      - "5439:5432"
+    environment:
+      POSTGRES_DB: merge_xml_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      PGDATA: /data/postgres
